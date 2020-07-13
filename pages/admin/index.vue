@@ -5,7 +5,10 @@
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <PostList isAdmin/>
+      <PostList
+        isAdmin
+        :posts="loadedPosts"
+      />
     </section>
   </div>
 </template>
@@ -15,10 +18,33 @@ import PostList from "@/components/Posts/PostList";
 import AppButton from "@/components/UI/AppButton";
 
 export default {
-  layout: 'admin',
+  layout: "admin",
   components: {
     PostList,
     AppButton
+  },
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: "1",
+            thumbnail:
+              "https://images6.alphacoders.com/355/thumb-1920-355348.png",
+            title: "Super Mario",
+            previewText: "O jogo mais irado da galaxia !",
+            calendar: "13/08/2050"
+          },
+          {
+            id: "2",
+            thumbnail: "https://wallpapercave.com/wp/Q9zm0x5.jpg",
+            title: "Minecraft é uma explosão",
+            previewText: "TTTTTTTTTTTTTTTTTTTSSSSSSSSSSSSSS BOOOOOOOM",
+            calendar: "07/08/2020"
+          }
+        ]
+      });
+    }, 1500);
   }
 };
 </script>
